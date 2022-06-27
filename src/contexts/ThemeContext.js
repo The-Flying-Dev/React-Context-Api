@@ -18,7 +18,7 @@ class ThemeContextProvider extends React.Component {
     }
   };
 
-  //add .Provider to end of the createContext() assigned variable name
+  //add .Provider to end of the createContext() assigned variable
   render() {
     return (
       <ThemeContext.Provider value={{ ...this.state }}> 

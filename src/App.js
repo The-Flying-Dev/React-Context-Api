@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <div className="ui raised very padded text container">
-        <ThemeContextProvider>
+        <ThemeContextProvider> {/* component wraps around children */}
           <Navbar />
           <TodoList />
         </ThemeContextProvider>

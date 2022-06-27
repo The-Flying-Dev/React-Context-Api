@@ -1,12 +1,15 @@
 import React from 'react';
-import { ThemeContext } from '../contexts/ThemeContext';
+import { ThemeContext } from '../contexts/ThemeContext'; //createContext()
 
 
 class Navbar extends React.Component {
+  //now can consume context Data
   static contextType = ThemeContext;
+
   render() {
-    const { isDarkTheme, darkTheme, lightTheme } = this.context;
+    const { isDarkTheme, darkTheme, lightTheme } = this.context; //destructure
     const theme = isDarkTheme ? darkTheme : lightTheme;
+
     return (
       <nav style={{ background: theme.background, color: theme.text, height: '120px' }}>
         <h2 style={{ textAlign: 'center' }}>
