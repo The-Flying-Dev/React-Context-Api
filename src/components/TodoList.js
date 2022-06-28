@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ThemeContext } from '../contexts/ThemeContext'; //createContext()
 
-class TodoList extends React.Component {
+
+class TodoList1 extends React.Component {
   //now can consume context Data
   static contextType = ThemeContext;
 
@@ -18,6 +19,20 @@ class TodoList extends React.Component {
       </div>
     )
   }
-}
+};
+
+const TodoList = () => {
+  const { isDarkTheme, darkTheme, lightTheme, changeTheme } = useContext(ThemeContext); //destructure
+  const theme = isDarkTheme ? darkTheme : lightTheme;
+
+  return (
+    <div style={{ background: theme.background, color: theme.text, height: '140px', textAlign: 'center' }}>
+      <p className='item'>Plan the trip</p>
+      <p className='item'>Go shopping</p>
+      <p className='item'>Workout</p>       {/* call function */}
+      <button className='ui button primary' onClick={changeTheme}>Change the theme</button>
+    </div>
+  );
+};
 
 export default TodoList;
