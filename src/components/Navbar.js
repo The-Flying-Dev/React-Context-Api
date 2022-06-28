@@ -1,27 +1,47 @@
 import React from 'react';
 import { ThemeContext } from '../contexts/ThemeContext'; //createContext()
-
+import { AuthContext } from '../contexts/AuthContext'; //createContext()
 
 class Navbar extends React.Component {
   //now can consume context Data
-  static contextType = ThemeContext;
+  //static contextType = ThemeContext;
 
   render() {
-    const { isDarkTheme, darkTheme, lightTheme } = this.context; //destructure
-    const theme = isDarkTheme ? darkTheme : lightTheme;
+    return(
+      <AuthContext.Consumer>{(authContext) => {
+        return(
+          <ThemeContext.Consumer>{(themeContext) => {
+            const { isDarkTheme, darkTheme, lightTheme } = themeContext; //destructure
+            const { isLoggedIn, changeAuthStatus } = authContext;
+            const theme = isDarkTheme ? darkTheme : lightTheme;
+    
+            return (
+              <nav style={{ background: theme.background, color: theme.text, height: '120px' }}>
+                <h2 style={{ textAlign: 'center' }}>
+                  Online Academy
+                </h2>
+                <p 
+                  onClick={changeAuthStatus} 
+                  style={{textAlign: 'center'}}
+                >
+                  { isLoggedIn ? 'Logged in' : 'Logged out' }
+                </p>
+                <div className='ui three buttons'>
+                  <button className='ui button'>Overview</button>
+                  <button className='ui button'>Contact</button>
+                  <button className='ui button'>Support</button>
+                </div>
+              </nav>
+            )
+          }}
+          </ThemeContext.Consumer>
+        )
+      }}
 
-    return (
-      <nav style={{ background: theme.background, color: theme.text, height: '120px' }}>
-        <h2 style={{ textAlign: 'center' }}>
-          Online Academy
-        </h2>
-        <div className='ui three buttons'>
-          <button className='ui button'>Overview</button>
-          <button className='ui button'>Contact</button>
-          <button className='ui button'>Support</button>
-        </div>
-      </nav>
-    )
+      </AuthContext.Consumer>
+      
+    );
+    
   }
 }
 

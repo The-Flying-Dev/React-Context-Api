@@ -18,10 +18,16 @@ class ThemeContextProvider extends React.Component {
     }
   };
 
+  //define function
+  changeTheme = () => {
+    this.setState({ isDarkTheme: !this.state.isDarkTheme })
+  };
+
   //add .Provider to end of the createContext() assigned variable
+  //which ever components gets wrapped inside the .Provider component will have access to the state data
   render() {
-    return (
-      <ThemeContext.Provider value={{ ...this.state }}> 
+    return (                                                       //add function to value props
+      <ThemeContext.Provider value={{ ...this.state, changeTheme: this.changeTheme }}> 
       {/* the context provides all the data inside the value props to it's children */}
         {this.props.children}
       </ThemeContext.Provider>
